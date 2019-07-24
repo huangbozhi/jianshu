@@ -1,0 +1,1 @@
+export const GET_LISTS = 'index/GET_LISTS';
