@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group'
-import { actionsCreate } from './store'
+import { Link, withRouter } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import { actionsCreate } from './store';
+import { message } from 'antd'
 import { actionsCreate as createAction } from '../../pages/login/store/'
 import './header.css'
 
@@ -52,22 +53,31 @@ class Header extends Component {
       return null;
     }
   }
-  // componentDidMount() {
-  //   console.log('header')
-  // }
+
+  login() {
+    const { history } = this.props
+    history.push('/login')
+  }
+
+  register() {
+    const { history } = this.props
+    history.push('/register')
+  }
+
+
   render() {
     return (
       <div className="header">
-        {/* <Link to='/home'> */}
-				  <div className="header-left"></div>
-				{/* </Link> */}
+        <Link to='/'>
+				  <div className="header-left pointer"></div>
+				</Link>
         <div className="header-center">
-          <div className="flex left active">首页</div>
-          <div className="flex left">下载App</div>
+          <div className="flex left active pointer">首页</div>
+          <div className="flex left pointer">下载App</div>
           {
             this.props.isLogin ? 
-            <div className="flex right exit" onClick={this.props.exit}>退出</div> :
-            <div className="flex right exit" href="/login" onClick={this.props.login}>登录</div>
+            <div className="flex right pointer" onClick={this.props.exit}>退出</div> :
+            <div className="flex right pointer" href="/login" onClick={this.login.bind(this)}>登录</div>
           }
           <div className="flex right">
             <i className="iconfont">&#xe607;</i>
@@ -83,15 +93,15 @@ class Header extends Component {
                 onFocus={() => this.props.handleInputFocus(this.props.lists)}
                 onBlur={this.props.handleInputBlur} />
             </CSSTransition>
-            <i className={`iconfont left searchImg ${this.props.focused ? 'active' : '' }`}>&#xe606;</i>
+            <i className={`iconfont left searchImg pointer ${this.props.focused ? 'active' : '' }`}>&#xe606;</i>
             {
               this.showSearch(this.props.focused)
             }
           </div>
         </div>
-        <div className="header-right">
-          <div className="button register">注册</div>
-          <div className="button write">
+        <div className="header-right ">
+          <div className="button register pointer" onClick={this.register.bind(this)}>注册</div>
+          <div className="button write pointer">
             <i className="iconfont">&#xe694;</i>
             写文章
           </div>
@@ -115,12 +125,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login() {
-      console.log(this.props.history);
-      this.history.push('/login');
-    },
+    // login() {
+    //   console.log(this.history);
+    //   // this.history.push('/login');
+    // },
     exit() {
       dispatch(createAction.exit())
+      message.warning('退出成功')
     },
     handleInputFocus(lists) {
       (lists.size === 0) && dispatch(actionsCreate.getList());
@@ -140,9 +151,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(action)
     },
     handleChangePage(page, totalPage,spin) {
-      console.log(page,totalPage,spin);
       let angle = spin.style.transform.replace(/[^0-9]/ig, '');
-      // let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
 			if (angle) {
 				angle = parseInt(angle, 10);
 			}else {
@@ -158,4 +167,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css'
 
 class List extends Component {
   // constructor(props){
   //   super(props);
   // }
- 
-  componentDidMount() {
-    console.log('componentDidMount',this.props,this.state)
-  }
 
   render() {
-    const { topicLists }  = this.props
+    const { topicLists }  = this.props;
     const newTopicLists = topicLists.toJS();
-    console.log('newTopicLists',newTopicLists)
     return (
       <div>
         {
@@ -21,9 +17,9 @@ class List extends Component {
             return (
               <div className="list" key={item.id}>
                 <div className="left">
-                  <a alt="" href="#" className="title">
+                  <Link to={`/detail/${item.id}`} className="title">
                     {item.title}
-                  </a>
+                  </Link>
                   <div className="desc">
                     {item.desc}
                   </div>

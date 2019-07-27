@@ -8,6 +8,7 @@ import store from './store/index'
 import Login from './pages/login'
 import Register from './pages/login/register'
 
+
 import 'antd/dist/antd.css';
 
 class App extends React.Component {
@@ -16,12 +17,12 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <div>
-          <Header />
           <Router>
+          <Header />
             <div>
               <Route path="/" exact component={Home}></Route>
               <Route path="/home" exact component={Home}></Route>
-              <Route path="/detail" exact component={Detail}></Route>
+              <Route path="/detail/:id" exact component={Detail}></Route>
               <Route path="/login" exact component={Login}></Route>
               <Route path="/register" exact component={Register}></Route>
             </div>

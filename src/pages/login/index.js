@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Button, Input } from 'antd';
+import { Redirect, Link } from 'react-router-dom';
+import { Button, Input, message } from 'antd';
 import { actionsCreate } from './store'
+
 import './index.css';
 
 class Login extends Component {
@@ -19,8 +20,6 @@ class Login extends Component {
       console.log(k)
       if(k.username == username && k.password == password) {
         return true
-      }else {
-        return 'false'
       }
     }
     return false
@@ -30,12 +29,18 @@ class Login extends Component {
     if(!this.props.isLogin){
       return (
         <div className="Login">
-          <div className="logo"></div>
+          <Link to='/'>
+            <div className="logo"></div>
+          </Link>
           <div className="loginBox">
             <div className="btn">
-              <a className={`sign-in ${isActive ? 'active' : ''}`} href="/login">登录</a>
+              <Link to='/login'>
+                <div className={`sign-in pointer ${isActive ? 'active' : ''}`}>登录</div>
+              </Link>
               <b>·</b>
-              <a className={`sign-out ${isActive ? '' : 'active'}`} href="/register">注册</a>
+              <Link to='/register'>
+                <div className={`sign-out pointer ${isActive ? '' : 'active'}`}>注册</div>
+              </Link>
             </div>
             <div className="input">
               <Input placeholder="请输入账号" type="text" onChange={(e)=>{this.username = e.target.value}} />
@@ -65,10 +70,12 @@ const mapDispatch = (dispatch) => {
       if(boolean){
         dispatch(actionsCreate.success(username, password));
         // alert('success');
+        message.success('登录成功')
         this.history.push('/')
       } else {
         // alert('failed');
-        this.history.push('/register')
+        message.warn('账号或密码错误，请重新输入')
+        // this.history.push('/login')
       }
     }
   }

@@ -6,7 +6,6 @@ export const getList = () => {
   return (dispatch) => {
     axios.get('/api/indexLists.json').then(res => {
       let data = res.data;
-      console.log('data',data);
       const action = {
         type: actionsTypes.GET_LISTS,
         data: fromJS(data)

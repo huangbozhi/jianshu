@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actionsCreate } from './store'
-import { Button, Input } from 'antd'
+import { Button, Input, message } from 'antd'
 import './index.css';
 
 class Register extends Component {
@@ -55,9 +55,10 @@ const mapDispatch = (dispatch) => {
     register(username, password, boolearn) {
       if(boolearn) {
         dispatch(actionsCreate.addUser(username, password));
+        message.success('注册成功')
         this.history.push('/login');
       } else {
-        // alert('failed) 已存在该用户
+        message.error('已存在该用户，请重新注册')
       }
     }
     // to -> 登录页面

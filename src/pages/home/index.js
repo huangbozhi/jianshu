@@ -13,13 +13,10 @@ class Home extends Component {
   // }
   componentWillMount() {
     this.props.getList();
-    console.log('componentWillMount',this.props.topicLists);
   }
   renderLists() {
     const { topicLists } = this.props;
     const newTopicLists = topicLists.toJS();
-    console.log('newTopicLists', newTopicLists)
-    // console.log('newTopicLists',newTopicLists)  
     if(newTopicLists.length > 0) {
       return <List topicLists={this.props.topicLists}></List>
     }
@@ -34,7 +31,6 @@ class Home extends Component {
             {
               this.renderLists()
             }
-            {/* <List></List> */}
           </div>
           <div className="home-right">
             <Recommend></Recommend>
@@ -47,14 +43,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log('state',state);
   return {
     topicLists: state.get('index').get('topicLists'),
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('dispatch')
   return {
     getList(){
       dispatch(actionsCreate.getList())

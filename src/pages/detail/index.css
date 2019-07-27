@@ -1,0 +1,36 @@
+p {
+  margin: 20px auto;
+}
+.article{
+  text-align: center;
+  /* bgc */
+}
+.article h1{
+  font-size: 36px;
+  margin: 25px auto;
+  font-weight: 700;
+}
+img{
+  text-align: center;
+  width: 700px;
+  height: 400px;
+  background-size: contain;
+}
+.article .context{
+  margin-top: 20px;
+}
+.context{
+  margin-left: 60px;
+}
+.context h1{
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.context p{
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.context p b{
+  font-weight: bold;
+}

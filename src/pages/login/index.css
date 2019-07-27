@@ -31,14 +31,20 @@
   margin-bottom: 10px;
   text-align: center;
   font-size: 18px;
+  display: block;
 }
 .btn .sign-in{
   padding: 15px;
   color: #969696;
+  display: inline-block;
 }
 .btn .sign-out{
   padding: 15px;
+  display: inline-block;
   color: #969696;
+}
+.pointer{
+  cursor: pointer;
 }
 .input{
   padding: 20px;
